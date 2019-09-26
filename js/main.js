@@ -2,6 +2,7 @@
 
 var OFFERS_QUANTITY = 8;
 var OFFER_HEADINGS = ['Заголовок 1', 'Заголовок 2', 'Заголовок 3', 'Заголовок 4'];
+var OFFER_PRICE_MAX = 70000;
 var OFFER_TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var OFFER_ROOMS = [1, 2, 3];
 var OFFER_GUESTS = [0, 1, 2];
@@ -32,8 +33,8 @@ var getUserAvatar = function (id) {
   return 'img/avatars/user0' + (id + 1) + '.png';
 };
 
-var getOfferPrice = function () {
-  return getRandomNumber(1, 70000);
+var showSimilarOffers = function () {
+  mapSection.classList.remove('map--faded');
 };
 
 var shuffleArray = function (array) {
@@ -51,8 +52,32 @@ var shuffleArray = function (array) {
 };
 
 var getRandomSizeForArray = function (array) {
-  var lastITem = getRandomNumber(0, array.length);
-  return array.slice(0, lastITem);
+  return array.slice(0, getRandomNumber(0, array.length));
+};
+
+var getOffer = function (id, locationX, locationY) {
+  return {
+    author: {
+      avatar: getUserAvatar(id)
+    },
+    offer: {
+      title: getRandomElement(OFFER_HEADINGS),
+      address: locationX + ', ' + locationY,
+      price: getRandomNumber(1, OFFER_PRICE_MAX),
+      type: getRandomElement(OFFER_TYPES),
+      rooms: getRandomElement(OFFER_ROOMS),
+      guests: getRandomElement(OFFER_GUESTS),
+      checkin: getRandomElement(OFFER_HOURS),
+      checkout: getRandomElement(OFFER_HOURS),
+      features: getRandomSizeForArray(shuffleArray(OFFER_FEATURES)),
+      description: getRandomElement(OFFER_DESCRIPTIONS),
+      photos: getRandomSizeForArray(shuffleArray(OFFER_PHOTOS))
+    },
+    location: {
+      x: locationX,
+      y: locationY
+    }
+  };
 };
 
 var getOffers = function (quantity) {
@@ -64,28 +89,7 @@ var getOffers = function (quantity) {
     randomLocationX = getRandomNumber(X_LOCATION_MIN, X_LOCATION_MAX);
     randomLocationY = getRandomNumber(Y_LOCATION_MIN, Y_LOCATION_MAX);
 
-    offers.push({
-      author: {
-        avatar: getUserAvatar(i)
-      },
-      offer: {
-        title: getRandomElement(OFFER_HEADINGS),
-        address: randomLocationX + ', ' + randomLocationY,
-        price: getOfferPrice(),
-        type: getRandomElement(OFFER_TYPES),
-        rooms: getRandomElement(OFFER_ROOMS),
-        guests: getRandomElement(OFFER_GUESTS),
-        checkin: getRandomElement(OFFER_HOURS),
-        checkout: getRandomElement(OFFER_HOURS),
-        features: getRandomSizeForArray(shuffleArray(OFFER_FEATURES)),
-        description: getRandomElement(OFFER_DESCRIPTIONS),
-        photos: getRandomSizeForArray(shuffleArray(OFFER_PHOTOS))
-      },
-      location: {
-        x: randomLocationX,
-        y: randomLocationY
-      }
-    });
+    offers.push(getOffer(i, randomLocationX, randomLocationY));
   }
 
   return offers;
@@ -109,5 +113,5 @@ var renderPins = function () {
   similarContainerElement.appendChild(fragment);
 };
 
-mapSection.classList.remove('map--faded');
+showSimilarOffers();
 renderPins();
