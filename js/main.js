@@ -51,7 +51,7 @@ var shuffleArray = function (array) {
   return array;
 };
 
-var getRandomSizeForArray = function (array) {
+var getRandomArray = function (array) {
   return array.slice(0, getRandomNumber(0, array.length));
 };
 
@@ -69,9 +69,9 @@ var getOffer = function (id, locationX, locationY) {
       guests: getRandomElement(OFFER_GUESTS),
       checkin: getRandomElement(OFFER_HOURS),
       checkout: getRandomElement(OFFER_HOURS),
-      features: getRandomSizeForArray(shuffleArray(OFFER_FEATURES)),
+      features: getRandomArray(shuffleArray(OFFER_FEATURES)),
       description: getRandomElement(OFFER_DESCRIPTIONS),
-      photos: getRandomSizeForArray(shuffleArray(OFFER_PHOTOS))
+      photos: getRandomArray(shuffleArray(OFFER_PHOTOS))
     },
     location: {
       x: locationX,
