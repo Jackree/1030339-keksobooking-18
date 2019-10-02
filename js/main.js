@@ -5,7 +5,7 @@
     window.form.enableAdForm();
     window.form.validateCapacity();
     window.map.showMap();
-    window.data.renderPins();
+    window.pin.renderPins();
   };
 
   window.form.disableAdForm();

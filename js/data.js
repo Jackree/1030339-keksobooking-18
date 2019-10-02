@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var OFFERS_QUANTITY = 8;
   var OFFER_HEADINGS = ['Заголовок 1', 'Заголовок 2', 'Заголовок 3', 'Заголовок 4'];
   var OFFER_PRICE_MAX = 70000;
   var OFFER_PIN_WIDTH = 50;
@@ -17,10 +16,6 @@
   var X_LOCATION_MAX = document.querySelector('.map').offsetWidth;
   var Y_LOCATION_MIN = 130;
   var Y_LOCATION_MAX = 630;
-
-  var similarOffersPinTemplate = document.querySelector('#pin')
-    .content
-    .querySelector('.map__pin');
 
   var getUserAvatar = function (id) {
     return 'img/avatars/user0' + (id + 1) + '.png';
@@ -66,25 +61,7 @@
     return offers;
   };
 
-  var renderPin = function (pin) {
-    var pinElement = similarOffersPinTemplate.cloneNode(true);
-    var photo = pinElement.querySelector('img[src]');
-    pinElement.style = 'left: ' + pin.location.x + 'px; top: ' + pin.location.y + 'px;';
-    photo.src = pin.author.avatar;
-    photo.alt = pin.offer.title;
-    return pinElement;
-  };
-
-  var renderPins = function () {
-    var offers = getOffers(OFFERS_QUANTITY);
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < offers.length; i++) {
-      fragment.appendChild(renderPin(offers[i]));
-    }
-    window.map.mapPins.appendChild(fragment);
-  };
-
   window.data = {
-    renderPins: renderPins
+    getOffers: getOffers
   };
 })();

@@ -1,6 +1,14 @@
 'use strict';
 
 (function () {
+  var ENTER_KEYCODE = 13;
+
+  var onEnterEventAction = function (evt, action) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      action();
+    }
+  };
+
   var getRandomElement = function (arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   };
@@ -31,6 +39,7 @@
     getRandomElement: getRandomElement,
     getRandomNumber: getRandomNumber,
     getRandomArray: getRandomArray,
-    shuffleArray: shuffleArray
+    shuffleArray: shuffleArray,
+    onEnterEventAction: onEnterEventAction
   };
 })();

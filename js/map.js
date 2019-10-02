@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var ENTER_KEYCODE = 13;
-
   var mapSection = document.querySelector('.map');
   var mapPins = document.querySelector('.map__pins');
   var mapPinMain = mapPins.querySelector('.map__pin--main');
@@ -21,9 +19,7 @@
   });
 
   mapPinMain.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      window.main.activatePage();
-    }
+    window.util.onEnterEventAction(evt, window.main.activatePage);
   });
 
   window.map = {
