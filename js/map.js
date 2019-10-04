@@ -8,7 +8,7 @@
   var mapPinMainHeight = Math.floor(mapPinMain.clientHeight / 2);
   var mapPinMainX = parseInt(mapPinMain.style.left, 10) + mapPinMainWidth;
   var mapPinMainY = parseInt(mapPinMain.style.top, 10) + mapPinMainHeight;
-  var mapPinMainArrowHeight = 22;
+  var mapPinMainArrowHeight = 16;
 
   var showMap = function () {
     mapSection.classList.remove('map--faded');

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var OFFERS_QUANTITY = 8;
   var OFFER_HEADINGS = ['Заголовок 1', 'Заголовок 2', 'Заголовок 3', 'Заголовок 4'];
   var OFFER_PRICE_MAX = 70000;
   var OFFER_PIN_WIDTH = 50;
@@ -62,6 +63,7 @@
   };
 
   window.data = {
+    OFFERS_QUANTITY: OFFERS_QUANTITY,
     getOffers: getOffers
   };
 })();

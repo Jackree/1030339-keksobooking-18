@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var OFFERS_QUANTITY = 8;
-
   var similarOffersPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
@@ -17,7 +15,7 @@
   };
 
   var renderPins = function () {
-    var offers = window.data.getOffers(OFFERS_QUANTITY);
+    var offers = window.data.getOffers(window.data.OFFERS_QUANTITY);
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < offers.length; i++) {
       fragment.appendChild(renderPin(offers[i]));
