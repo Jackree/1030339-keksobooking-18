@@ -14,12 +14,31 @@
     mapSection.classList.remove('map--faded');
   };
 
+  var onPinPressAction = function (evt) {
+    var target = evt.target;
+    var offerPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+
+    for (var i = 0; i < offerPins.length; i++) {
+      if (target.closest('.map__pin:not(.map__pin--main)') === offerPins[i]) {
+        window.card.renderCards(i);
+      }
+    }
+  };
+
   mapPinMain.addEventListener('mousedown', function () {
     window.main.activatePage();
   });
 
   mapPinMain.addEventListener('keydown', function (evt) {
     window.util.onEnterEventAction(evt, window.main.activatePage);
+  });
+
+  mapPins.addEventListener('mousedown', function (evt) {
+    onPinPressAction(evt);
+  });
+
+  mapPins.addEventListener('keydown', function (evt) {
+    window.util.onEnterEventAction(evt, onPinPressAction(evt));
   });
 
   window.map = {

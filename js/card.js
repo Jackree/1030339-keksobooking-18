@@ -7,6 +7,7 @@
   var mapSection = document.querySelector('.map');
   var mapFilters = mapSection.querySelector('.map__filters-container');
   var cardElement = offerCardTemplate.cloneNode(true);
+  var cardCloseButton = cardElement.querySelector('.popup__close');
   var cardTitle = cardElement.querySelector('.popup__title');
   var cardAddress = cardElement.querySelector('.popup__text--address');
   var cardPrice = cardElement.querySelector('.popup__text--price');
@@ -18,7 +19,7 @@
   var cardPhotos = cardElement.querySelector('.popup__photos');
   var cardAvatar = cardElement.querySelector('.popup__avatar');
 
-  var offerTypes = {
+  var offerTypeMap = {
     palace: 'Дворец',
     flat: 'Квартира',
     house: 'Дом',
@@ -29,6 +30,20 @@
     while (element.lastElementChild) {
       element.removeChild(element.lastElementChild);
     }
+  };
+
+  var onCardPopupEscPress = function (evt) {
+    window.util.onEscEventAction(evt, closeCard);
+  };
+
+  var showCard = function () {
+    cardElement.classList.remove('hidden');
+    document.addEventListener('keydown', onCardPopupEscPress);
+  };
+
+  var closeCard = function () {
+    cardElement.classList.add('hidden');
+    document.removeEventListener('keydown', onCardPopupEscPress);
   };
 
   var createFeaturesListItems = function (ad) {
@@ -62,7 +77,7 @@
     cardTitle.textContent = ad.offer.title;
     cardAddress.textContent = ad.offer.address;
     cardPrice.textContent = ad.offer.price + '₽/ночь';
-    cardType.textContent = offerTypes[ad.offer.type];
+    cardType.textContent = offerTypeMap[ad.offer.type];
     cardCapacity.textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
     cardTime.textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
     cardDescription.textContent = ad.offer.description;
@@ -73,12 +88,21 @@
     return cardElement;
   };
 
-  var renderCards = function () {
+  var renderCards = function (id) {
     var offers = window.data.getOffers(window.data.OFFERS_QUANTITY);
     var fragment = document.createDocumentFragment();
-    fragment.appendChild(renderCard(offers[0]));
+    fragment.appendChild(renderCard(offers[id]));
     mapFilters.before(fragment);
+    showCard();
   };
+
+  cardCloseButton.addEventListener('mousedown', function () {
+    closeCard();
+  });
+
+  cardCloseButton.addEventListener('keydown', function (evt) {
+    window.util.onEnterEventAction(evt, closeCard);
+  });
 
   window.card = {
     renderCards: renderCards
