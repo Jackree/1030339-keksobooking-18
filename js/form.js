@@ -41,10 +41,16 @@
     var roomsValue = parseInt(adFormRoomSelect.value, 10);
     var capacityValue = parseInt(adFormCapacitySelect.value, 10);
 
-    if (capacityValue > roomsValue) {
-      adFormCapacitySelect.setCustomValidity('Гости не смогут разместиться в выбранном количестве комнат');
-    } else {
-      adFormCapacitySelect.setCustomValidity('');
+    switch (true) {
+      case (capacityValue > roomsValue):
+        adFormCapacitySelect.setCustomValidity('Гости не смогут разместиться в выбранном количестве комнат');
+        break;
+      case (capacityValue === MIN_GUESTS && roomsValue !== MAX_ROOMS):
+        adFormCapacitySelect.setCustomValidity('Не для гостей только 100 комнат');
+        break;
+      default:
+        adFormCapacitySelect.setCustomValidity('');
+        break;
     }
 
     if (roomsValue === MAX_ROOMS && capacityValue !== MIN_GUESTS) {
