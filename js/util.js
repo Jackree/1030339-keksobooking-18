@@ -1,10 +1,19 @@
 'use strict';
 
 (function () {
-  var ENTER_KEYCODE = 13;
+  var KEYCODE = {
+    ENTER: 13,
+    ESC: 27
+  };
 
   var onEnterEventAction = function (evt, action) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    if (evt.keyCode === KEYCODE.ENTER) {
+      action();
+    }
+  };
+
+  var onEscEventAction = function (evt, action) {
+    if (evt.keyCode === KEYCODE.ESC) {
       action();
     }
   };
@@ -40,6 +49,7 @@
     getRandomNumber: getRandomNumber,
     getRandomArray: getRandomArray,
     shuffleArray: shuffleArray,
-    onEnterEventAction: onEnterEventAction
+    onEnterEventAction: onEnterEventAction,
+    onEscEventAction: onEscEventAction
   };
 })();
