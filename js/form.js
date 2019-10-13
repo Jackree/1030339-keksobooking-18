@@ -21,8 +21,12 @@
     palace: 10000
   };
 
+  var setAddress = function (xCoord, yCoord) {
+    adFormAddressInput.value = xCoord + ', ' + yCoord;
+  };
+
   var disableAdForm = function () {
-    adFormAddressInput.value = window.map.mapPinMainX + ', ' + window.map.mapPinMainY;
+    setAddress(window.map.mapPinMainX, window.map.mapPinMainYDefault);
     adForm.classList.add('ad-form--disabled');
     adFormFieldsets.forEach(function (element) {
       element.disabled = true;
@@ -30,7 +34,7 @@
   };
 
   var enableAdForm = function () {
-    adFormAddressInput.value = window.map.mapPinMainX + ', ' + (window.map.mapPinMainY + window.map.mapPinMainArrowHeight);
+    setAddress(window.map.mapPinMainX, window.map.mapPinMainY);
     adForm.classList.remove('ad-form--disabled');
     adFormFieldsets.forEach(function (element) {
       element.disabled = false;
@@ -96,6 +100,7 @@
   window.form = {
     disableAdForm: disableAdForm,
     enableAdForm: enableAdForm,
-    validateCapacity: validateCapacity
+    validateCapacity: validateCapacity,
+    setAddress: setAddress
   };
 })();
