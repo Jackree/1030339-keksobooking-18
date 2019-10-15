@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
+  var OFFERS_LOAD_URL = 'https://js.dump.academy/keksobooking/data';
   var TIMEOUT = 10000;
   var SUCCESS_CODE = 200;
 
-  var load = function (onSuccess, onError) {
+  var load = function (url, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.timeout = TIMEOUT;
     xhr.responseType = 'json';
@@ -26,11 +26,12 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('GET', URL_LOAD);
+    xhr.open('GET', url);
     xhr.send();
   };
 
   window.backend = {
-    load: load
+    load: load,
+    OFFERS_LOAD_URL: OFFERS_LOAD_URL
   };
 })();
