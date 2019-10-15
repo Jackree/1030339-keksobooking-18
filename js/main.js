@@ -5,7 +5,7 @@
     window.form.enableAdForm();
     window.form.validateCapacity();
     window.map.showMap();
-    window.pin.renderPins();
+    window.backend.load(window.pin.renderPins, window.showError.onError);
   };
 
   window.form.disableAdForm();
