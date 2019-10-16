@@ -14,8 +14,8 @@
     return pinElement;
   };
 
-  var renderPins = function () {
-    var offers = window.data.getOffers(window.data.OFFERS_QUANTITY);
+  var renderPins = function (offers) {
+    window.pin.offers = offers;
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < offers.length; i++) {
       fragment.appendChild(renderPin(offers[i]));

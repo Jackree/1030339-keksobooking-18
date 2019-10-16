@@ -89,7 +89,7 @@
   };
 
   var renderCards = function (id) {
-    var offers = window.data.getOffers(window.data.OFFERS_QUANTITY);
+    var offers = window.pin.offers;
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderCard(offers[id]));
     mapFilters.before(fragment);
