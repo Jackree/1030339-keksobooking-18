@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var OFFERS_LOAD_URL = 'https://js.dump.academy/keksobooking/data';
   var TIMEOUT = 10000;
   var SUCCESS_CODE = 200;
 
@@ -31,7 +30,6 @@
   };
 
   window.backend = {
-    load: load,
-    OFFERS_LOAD_URL: OFFERS_LOAD_URL
+    load: load
   };
 })();

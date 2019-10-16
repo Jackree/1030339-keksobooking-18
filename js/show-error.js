@@ -9,7 +9,7 @@
   var errorButton = errorElement.querySelector('.error__button');
 
   var onErrorButtonClick = function (evt) {
-    window.backend.load(window.backend.OFFERS_LOAD_URL, window.pin.renderPins, onError);
+    window.backend.load(window.main.OFFERS_LOAD_URL, window.pin.renderPins, onError);
     evt.target.parentNode.remove();
   };
 
