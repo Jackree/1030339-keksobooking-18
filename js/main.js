@@ -7,7 +7,7 @@
     window.form.enableAdForm();
     window.form.validateCapacity();
     window.map.showMap();
-    window.backend.load(OFFERS_LOAD_URL, window.pin.renderPins, window.showError.onError);
+    window.backend.load(OFFERS_LOAD_URL, window.filter.onSuccess, window.showError.onError);
   };
 
   window.form.disableAdForm();
