@@ -4,8 +4,7 @@
   var TIMEOUT = 10000;
   var SUCCESS_CODE = 200;
 
-  var load = function (url, onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
+  var setRequest = function (xhr, onSuccess, onError) {
     xhr.timeout = TIMEOUT;
     xhr.responseType = 'json';
 
@@ -24,12 +23,28 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
+  };
+
+  var load = function (url, onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+
+    setRequest(xhr, onSuccess, onError);
 
     xhr.open('GET', url);
     xhr.send();
   };
 
+  var save = function (data, url, onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+
+    setRequest(xhr, onSuccess, onError);
+
+    xhr.open('POST', url);
+    xhr.send(data);
+  };
+
   window.backend = {
-    load: load
+    load: load,
+    save: save
   };
 })();

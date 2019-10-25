@@ -12,6 +12,10 @@
     }
   };
 
+  var mainPinDefaultCoords = {
+    X: 570,
+    Y: 375
+  };
 
   var mapSection = document.querySelector('.map');
   var mapPins = document.querySelector('.map__pins');
@@ -23,6 +27,12 @@
   var mapPinMainArrowHeight = 16;
   var mapPinMainHeight = mapPinMainHeightDefault + mapPinMainArrowHeight;
   var mapPinMainY = mapPinMain.offsetTop + mapPinMainHeight;
+
+  var resetPinPosition = function () {
+    mapPinMain.style.top = mainPinDefaultCoords.Y + 'px';
+    mapPinMain.style.left = mainPinDefaultCoords.X + 'px';
+    window.form.setAddress(mainPinDefaultCoords.X + Math.floor(mapPinMainWidth / 2), mainPinDefaultCoords.Y + mapPinMainHeight);
+  };
 
   var showMap = function () {
     mapSection.classList.remove('map--faded');
@@ -121,6 +131,7 @@
     showMap: showMap,
     mapPinMainX: mapPinMainX,
     mapPinMainY: mapPinMainY,
-    mapPinMainYDefault: mapPinMainYDefault
+    mapPinMainYDefault: mapPinMainYDefault,
+    resetPinPosition: resetPinPosition
   };
 })();

@@ -3,6 +3,7 @@
 (function () {
   var MAX_ROOMS = 100;
   var MIN_GUESTS = 0;
+  var SAVE_URL = 'https://js.dump.academy/keksobooking';
 
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('fieldset');
@@ -95,6 +96,20 @@
 
   adFormTimeOutSelect.addEventListener('change', function () {
     setOfferTimeIn();
+  });
+
+  var onSuccessSubmit = function () {
+    window.pin.deletePins();
+    window.card.closeCard();
+    window.showSuccess.showSuccessMessage();
+    adForm.reset();
+    window.map.resetPinPosition();
+  };
+
+  adForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var data = new FormData(adForm);
+    window.backend.save(data, SAVE_URL, onSuccessSubmit, window.showError.onError);
   });
 
   window.form = {

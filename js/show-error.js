@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var mainSection = document.querySelector('main');
   var errorTemplate = document.querySelector('#error')
     .content
     .querySelector('.error');
@@ -8,16 +9,22 @@
   var errorMessageElement = errorElement.querySelector('.error__message');
   var errorButton = errorElement.querySelector('.error__button');
 
-  var onErrorButtonClick = function (evt) {
-    window.backend.load(window.main.OFFERS_LOAD_URL, window.pin.renderPins, onError);
-    evt.target.parentNode.remove();
+  var closeErrorMessage = function () {
+    errorElement.remove();
+    document.removeEventListener('mousedown', closeErrorMessage);
+    document.removeEventListener('keydown', onErrorMessageEscPress);
+  };
+
+  var onErrorMessageEscPress = function (evt) {
+    window.util.onEscEventAction(evt, closeErrorMessage);
   };
 
   var onError = function (errorMessage) {
-    var mapSection = document.querySelector('.map');
     errorMessageElement.textContent = errorMessage;
-    errorButton.addEventListener('click', onErrorButtonClick);
-    mapSection.insertAdjacentElement('beforebegin', errorElement);
+    errorButton.addEventListener('click', closeErrorMessage);
+    mainSection.insertAdjacentElement('afterbegin', errorElement);
+    document.addEventListener('mousedown', closeErrorMessage);
+    document.addEventListener('keydown', onErrorMessageEscPress);
     return errorElement;
   };
 
