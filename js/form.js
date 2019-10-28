@@ -104,6 +104,8 @@
     window.showSuccess.showSuccessMessage();
     adForm.reset();
     window.map.resetPinPosition();
+    window.map.hideMap();
+    window.form.disableAdForm();
   };
 
   adForm.addEventListener('submit', function (evt) {

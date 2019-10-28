@@ -38,6 +38,10 @@
     mapSection.classList.remove('map--faded');
   };
 
+  var hideMap = function () {
+    mapSection.classList.add('map--faded');
+  };
+
   var onPinPressAction = function (evt) {
     var target = evt.target;
     var offerPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -129,6 +133,7 @@
   window.map = {
     mapPins: mapPins,
     showMap: showMap,
+    hideMap: hideMap,
     mapPinMainX: mapPinMainX,
     mapPinMainY: mapPinMainY,
     mapPinMainYDefault: mapPinMainYDefault,
