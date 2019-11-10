@@ -50,7 +50,7 @@
       case 'low':
         return element.offer.price < Price.MIDDLE;
       case 'middle':
-        return element.offer.price >= Price.MIDDLE && element.offer.price <= PRICE.HIGH;
+        return element.offer.price >= Price.MIDDLE && element.offer.price <= Price.HIGH;
       case 'high':
         return element.offer.price > Price.HIGH;
       default:

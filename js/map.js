@@ -126,7 +126,7 @@
     if (mapSection.classList.contains('map--faded')) {
       if (window.util.isEnterEvent(evt)) {
         window.main.activatePage();
-      };
+      }
     }
   });
 
