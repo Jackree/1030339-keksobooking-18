@@ -9,21 +9,25 @@
   var errorMessageElement = errorElement.querySelector('.error__message');
   var errorButton = errorElement.querySelector('.error__button');
 
-  var closeErrorMessage = function () {
-    errorElement.remove();
-    document.removeEventListener('mousedown', closeErrorMessage);
-    document.removeEventListener('keydown', onErrorMessageEscPress);
+  var closeErrorMessage = function (evt) {
+    if (evt.target !== errorMessageElement) {
+      errorElement.remove();
+      document.removeEventListener('click', closeErrorMessage);
+      document.removeEventListener('keydown', onErrorMessageEscPress);
+    }
   };
 
   var onErrorMessageEscPress = function (evt) {
-    window.util.onEscEventAction(evt, closeErrorMessage);
+    if (window.util.isEscEvent(evt)) {
+      closeErrorMessage();
+    }
   };
 
   var onError = function (errorMessage) {
     errorMessageElement.textContent = errorMessage;
     errorButton.addEventListener('click', closeErrorMessage);
     mainSection.insertAdjacentElement('afterbegin', errorElement);
-    document.addEventListener('mousedown', closeErrorMessage);
+    document.addEventListener('click', closeErrorMessage);
     document.addEventListener('keydown', onErrorMessageEscPress);
     return errorElement;
   };

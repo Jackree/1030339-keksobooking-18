@@ -14,7 +14,9 @@
   };
 
   var onSuccessMessageEscPress = function (evt) {
-    window.util.onEscEventAction(evt, closeSuccessMessage);
+    if (window.util.isEscEvent(evt)) {
+      closeSuccessMessage();
+    }
   };
 
   var showSuccessMessage = function () {

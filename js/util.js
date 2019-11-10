@@ -1,29 +1,25 @@
 'use strict';
 
 (function () {
-  var KEYCODE = {
+  var Keycode = {
     ENTER: 13,
     ESC: 27
   };
 
-  var onEnterEventAction = function (evt, action) {
-    if (evt.keyCode === KEYCODE.ENTER) {
-      action();
-    }
+  var isEnterEvent = function (evt) {
+    return evt.keyCode === Keycode.ENTER;
   };
 
-  var onEscEventAction = function (evt, action) {
-    if (evt.keyCode === KEYCODE.ESC) {
-      action();
-    }
+  var isEscEvent = function (evt) {
+    return evt.keyCode === Keycode.ESC;
   };
 
-  var getRandomElement = function (arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+  var getRandomElement = function (array) {
+    return array[Math.floor(Math.random() * array.length)];
   };
 
   var getRandomNumber = function (min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
   var shuffleArray = function (array) {
@@ -49,7 +45,7 @@
     getRandomNumber: getRandomNumber,
     getRandomArray: getRandomArray,
     shuffleArray: shuffleArray,
-    onEnterEventAction: onEnterEventAction,
-    onEscEventAction: onEscEventAction
+    isEnterEvent: isEnterEvent,
+    isEscEvent: isEscEvent
   };
 })();

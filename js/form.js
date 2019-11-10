@@ -14,6 +14,7 @@
   var adFormPriceInput = adForm.querySelector('#price');
   var adFormTimeInSelect = adForm.querySelector('#timein');
   var adFormTimeOutSelect = adForm.querySelector('#timeout');
+  var adFormReset = adForm.querySelector('.ad-form__reset');
 
   var offerTypePriceMap = {
     bungalo: 0,
@@ -98,20 +99,30 @@
     setOfferTimeIn();
   });
 
-  var onSuccessSubmit = function () {
+  var deactivatePage = function () {
     window.pin.deletePins();
     window.card.closeCard();
-    window.showSuccess.showSuccessMessage();
     adForm.reset();
     window.map.resetPinPosition();
     window.map.hideMap();
     window.form.disableAdForm();
+    window.filter.deactivateFilter();
+  };
+
+  var onSuccessSubmit = function () {
+    window.showSuccess.showSuccessMessage();
+    deactivatePage();
   };
 
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     var data = new FormData(adForm);
     window.backend.save(data, SAVE_URL, onSuccessSubmit, window.showError.onError);
+  });
+
+  adFormReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    deactivatePage();
   });
 
   window.form = {
