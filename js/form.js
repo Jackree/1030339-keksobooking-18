@@ -103,6 +103,7 @@
     window.pin.deletePins();
     window.card.closeCard();
     adForm.reset();
+    setMinPrice();
     window.map.resetPinPosition();
     window.map.hideMap();
     window.form.disableAdForm();
